@@ -40,3 +40,21 @@ body {
     grid-template-rows: repeat(6, 60px);
     gap: 10px;
 }
+
+.sqrt-icon {
+    width: 50px;
+    height: 50px;
+    vertical-align: middle;
+}
+
+.divide-icon {
+    width: 35px;
+    height: 35px;
+    vertical-align: middle;
+}
+
+.multiply-icon {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
