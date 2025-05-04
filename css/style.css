@@ -1,3 +1,8 @@
+@font-face {
+    font-family: "Digital";
+    src: url("../assets/fonts/digital-7.regular.ttf");
+}
+
 body {
     display: flex;
     justify-content: center;
@@ -22,7 +27,7 @@ body {
     background-color: #9fafb1;
     text-align: right;
     border-radius: 5px;
-    font-family: 'Consolas', 'Courier New', monospace;
+    font-family: "Digital";
     font-size: 62.5px;
     margin-bottom: 20px;
     padding: 0 5px;
