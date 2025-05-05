@@ -39,6 +39,22 @@ body {
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(6, 60px);
     gap: 10px;
+    padding-bottom: 3px;
+}
+
+.btn {
+    font-size: 24px;
+    font-weight: 500px;
+    color: #c3cbd4;
+    background-color: #1e2024;
+    box-shadow: 0 3px #040404;
+    border: solid 1px #040404;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#plus {
+    grid-row: span 2;
 }
 
 .sqrt-icon {
