@@ -20,3 +20,16 @@ const updateDisplay = (value) => {
     }
     display.textContent = displayValue;
 };
+
+const add = (num1, num2) => num1 + num2;
+
+const subtract = (num1, num2) => num1 - num2;
+
+const multiply = (num1, num2) => num1 * num2;
+
+const divide = (num1, num2) => {
+    if (num2 === 0) {
+        return "Error"; // Handle division by zero
+    }
+    return num1 / num2;
+};
