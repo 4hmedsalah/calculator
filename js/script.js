@@ -5,7 +5,7 @@ display.textContent = "0";
 
 // Calculator State Variables
 let currentInput = "";
-let firstOperand = '';
+let firstOperand = "";
 let currentOperator = null;
 let shouldResetDisplay = false;
 
@@ -38,13 +38,13 @@ const divide = (num1, num2) => {
 // Perform arithmetic operations based on the provided operator
 const operate = (num1, num2, operator) => {
     switch (operator) {
-        case '+':
+        case "+":
             return add(num1, num2);
-        case '-':
+        case "-":
             return subtract(num1, num2);
-        case '*':
+        case "*":
             return multiply(num1, num2);
-        case '/':
+        case "/":
             return divide(num1, num2);
         default:
             return null; // Return null for invalid operators
