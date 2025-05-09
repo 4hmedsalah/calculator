@@ -4,6 +4,7 @@ const display = document.querySelector(".result-display");
 display.textContent = "0";
 
 // Calculator State Variables
+let currentInput = "";
 let firstOperand = '';
 let currentOperator = null;
 let shouldResetDisplay = false;
@@ -49,3 +50,11 @@ const operate = (num1, num2, operator) => {
             return null; // Return null for invalid operators
     }
 };
+
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const value = button.textContent;
+        currentInput += value;
+        display.textContent = currentInput;
+    });
+});
