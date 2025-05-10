@@ -6,6 +6,7 @@ display.textContent = "0";
 // Calculator State Variables
 let currentInput = "";
 let firstOperand = "";
+let lastOperand = "";  // For storing the second operand in repeat operations
 let currentOperator = null;
 let shouldResetDisplay = false;
 
@@ -57,6 +58,7 @@ buttons.forEach((button) => {
         if (value === "C") {
             currentInput = "";
             firstOperand = "";
+            lastOperand = "";
             currentOperator = null;
             updateDisplay("0");
             return;
@@ -68,6 +70,36 @@ buttons.forEach((button) => {
             currentOperator = value;
             shouldResetDisplay = true;
             return;
+        } else if (value === "=") {
+            // Skip if there's no input or operator
+            if (firstOperand === "" || currentOperator === null) return;
+
+            // If currentInput is empty or we're repeating =, use lastOperand
+            if (currentInput === "" || shouldResetDisplay) {
+                // For first equals press with empty second operand
+                if (lastOperand === "") {
+                    lastOperand = firstOperand; // Use first operand as second
+                }
+                currentInput = lastOperand; // Use stored value
+            } else {
+                // Normal operation - store the second operand
+                lastOperand = currentInput;
+            }
+
+            // Perform the calculation
+            const result = operate(Number(firstOperand), Number(currentInput), currentOperator);
+
+            // Store result and update display
+            firstOperand = result.toString();
+            currentInput = result.toString();
+            shouldResetDisplay = true;
+            updateDisplay(currentInput);
+            return;
+        }
+        // Check if we need to reset display before adding new input
+        if (shouldResetDisplay) {
+            currentInput = "";
+            shouldResetDisplay = false;
         }
         currentInput += value;
         updateDisplay(currentInput);
