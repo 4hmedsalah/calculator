@@ -58,7 +58,7 @@ buttons.forEach((button) => {
             currentInput = "";
             firstOperand = "";
             currentOperator = null;
-            display.textContent = "0";
+            updateDisplay("0");
             return;
         } else if (value === "+" || value === "-" || value === "*" || value === "/") {
             // Skip if there's no input
@@ -70,6 +70,6 @@ buttons.forEach((button) => {
             return;
         }
         currentInput += value;
-        display.textContent = currentInput;
+        updateDisplay(currentInput);
     });
 });
