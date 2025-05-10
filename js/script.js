@@ -54,6 +54,13 @@ const operate = (num1, num2, operator) => {
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.getAttribute('data-value');
+        if (value === "C") {
+            currentInput = "";
+            firstOperand = "";
+            currentOperator = null;
+            display.textContent = "0";
+            return;
+        }
         currentInput += value;
         display.textContent = currentInput;
     });
