@@ -60,6 +60,14 @@ buttons.forEach((button) => {
             currentOperator = null;
             display.textContent = "0";
             return;
+        } else if (value === "+" || value === "-" || value === "*" || value === "/") {
+            // Skip if there's no input
+            if (currentInput === "") return;
+
+            firstOperand = currentInput;
+            currentOperator = value;
+            shouldResetDisplay = true;
+            return;
         }
         currentInput += value;
         display.textContent = currentInput;
