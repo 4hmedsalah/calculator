@@ -10,23 +10,23 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
     margin: 0;
-    background-color: #e0e0e0;
+    background-image: url("../assets/images/background.webp");
+    background-size: cover;
+    background-position: center;
 }
 
 .calculator {
-    background-color: #252429;
+    background-color: #242424;
     padding: 20px;
     border-radius: 10px;
     width: 320px;
-    border: 1px solid #ccc;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .display {
-    color: #11100f;
-    background-color: #9fafb1;
+    color: #b89678;
+    background-color: #343434;
     text-align: right;
-    border-radius: 5px;
+    border-radius: 2.5px;
     font-family: "Digital";
     font-size: 62.5px;
     margin-bottom: 20px;
@@ -45,8 +45,8 @@ body {
 .btn {
     font-size: 24px;
     font-weight: 500px;
-    color: #c3cbd4;
-    background-color: #1e2024;
+    color: #b89678;
+    background-color: #151515;
     box-shadow: 0 3px #040404;
     border: solid 1px #040404;
     border-radius: 5px;
@@ -55,7 +55,7 @@ body {
 }
 
 .btn:hover {
-    background-color: #191b1d;
+    background-color: #343434;
 }
 
 .btn:active {
@@ -64,14 +64,14 @@ body {
 }
 
 .operator-active {
-    background-color: #191b1d;
+    background-color: #343434;
     transform: translateY(3px);
     box-shadow: none;
     transition: none;
 }
 
 .operator-active:hover {
-    background-color: #191b1d;
+    background-color: #343434;
 }
 
 #plus {
