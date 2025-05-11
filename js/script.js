@@ -10,6 +10,12 @@ let lastOperand = "";  // For storing the second operand in repeat operations
 let currentOperator = null;
 let shouldResetDisplay = false;
 
+const clearActiveOperators = () => {
+    document.querySelectorAll('.operator').forEach(op => {
+        op.classList.remove('operator-active');
+    });
+};
+
 const updateDisplay = (value) => {
     let displayValue = value.toString();
     // Limit display length for readability
@@ -60,11 +66,18 @@ buttons.forEach((button) => {
             firstOperand = "";
             lastOperand = "";
             currentOperator = null;
+            clearActiveOperators();
             updateDisplay("0");
             return;
         } else if (value === "+" || value === "-" || value === "*" || value === "/") {
             // Skip if there's no input
             if (currentInput === "") return;
+
+            // Remove active class from all operator buttons
+            clearActiveOperators();
+
+            // Add active class to the clicked operator button
+            button.classList.add('operator-active');
 
             firstOperand = currentInput;
             currentOperator = value;
@@ -93,6 +106,7 @@ buttons.forEach((button) => {
             firstOperand = result.toString();
             currentInput = result.toString();
             shouldResetDisplay = true;
+            clearActiveOperators();
             updateDisplay(currentInput);
             return;
         }
@@ -100,6 +114,9 @@ buttons.forEach((button) => {
         if (shouldResetDisplay) {
             currentInput = "";
             shouldResetDisplay = false;
+
+            // Remove operator active state when user starts entering second number
+            clearActiveOperators();
         }
         currentInput += value;
         updateDisplay(currentInput);

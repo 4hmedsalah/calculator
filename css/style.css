@@ -51,6 +51,27 @@ body {
     border: solid 1px #040404;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.2s, transform 0.05s, box-shadow 0.05s;
+}
+
+.btn:hover {
+    background-color: #191b1d;
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px #040404;
+}
+
+.operator-active {
+    background-color: #191b1d;
+    transform: translateY(3px);
+    box-shadow: none;
+    transition: none;
+}
+
+.operator-active:hover {
+    background-color: #191b1d;
 }
 
 #plus {
