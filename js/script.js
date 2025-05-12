@@ -93,6 +93,13 @@ buttons.forEach((button) => {
             clearActiveOperators();
             updateDisplay("0");
             return;
+        } else if (value === "DEL") {
+            // Delete last character from current input
+            if (currentInput.length > 0) {
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay(currentInput === "" ? "0" : currentInput);
+            }
+            return;
         } else if (value === "+" || value === "-" || value === "*" || value === "/") {
             // Skip if there's no input
             if (currentInput === "") return;
