@@ -156,32 +156,40 @@ buttons.forEach((button) => {
             updateDisplay(currentInput);
             return;
         } else if (value === "=") {
-            // Skip if there's no input or operator
-            if (firstOperand === "" || currentOperator === null) return;
+            // Skip if there's no operator
+            if (currentOperator === null) return;
 
-            // If currentInput is empty or we're repeating =, use lastOperand
-            if (currentInput === "" || shouldResetDisplay) {
-                // For first equals press with empty second operand
-                if (lastOperand === "") {
-                    lastOperand = firstOperand; // Use first operand as second
-                }
-                currentInput = lastOperand; // Use stored value
-            } else {
-                // Normal operation - store the second operand
+            // Handle case when firstOperand is empty (e.g., starting with operator)
+            if (firstOperand === "") {
+                firstOperand = "0";
+            }
+
+            // Check if we have a current input or a stored lastOperand
+            if (currentInput === "" && lastOperand === "") {
+                return; // Don't perform any calculation
+            }
+
+            // First equals press with a second operand entered
+            if (currentInput !== "" && !shouldResetDisplay) {
+                // Store the current input as lastOperand for repeated operations
                 lastOperand = currentInput;
+            } else if (currentInput === "") {
+                // If currentInput is empty but we have a lastOperand from previous equals
+                currentInput = lastOperand;
             }
 
             // Perform the calculation
             const result = operate(Number(firstOperand), Number(currentInput), currentOperator);
 
-            // Store result and update display
-            firstOperand = result.toString();
-            currentInput = result.toString();
-            shouldResetDisplay = true;
+            // Update display and state for next calculation
+            updateDisplay(result);
             clearActiveOperators();
-            updateDisplay(currentInput);
+            firstOperand = result.toString();
+            currentInput = ""; // Clear current input so next equals press will use lastOperand
+            shouldResetDisplay = true;
             return;
         }
+
         // Check if we need to reset display before adding new input
         if (shouldResetDisplay) {
             currentInput = "";
