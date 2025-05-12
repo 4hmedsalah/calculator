@@ -42,6 +42,11 @@ const divide = (num1, num2) => {
     return num1 / num2;
 };
 
+const calculateSquareRoot = (num) => {
+    if (num < 0) return "Error"; // Can't take square root of negative number
+    return Math.sqrt(num);
+};
+
 // Perform arithmetic operations based on the provided operator
 const operate = (num1, num2, operator) => {
     switch (operator) {
@@ -83,6 +88,17 @@ buttons.forEach((button) => {
             firstOperand = currentInput;
             currentOperator = value;
             shouldResetDisplay = true;
+            return;
+        } else if (value === "√") {
+            // Use currentInput if available, otherwise use firstOperand (for post-calculation)
+            const numberForSquareRoot = currentInput !== "" ? currentInput : firstOperand;
+            if (numberForSquareRoot === "") return;
+
+            // Calculate square root directly, our function already handles negative values
+            const result = calculateSquareRoot(Number(numberForSquareRoot));
+            currentInput = result.toString();
+            firstOperand = result.toString(); // Update firstOperand as well
+            updateDisplay(currentInput);
             return;
         } else if (value === "=") {
             // Skip if there's no input or operator
