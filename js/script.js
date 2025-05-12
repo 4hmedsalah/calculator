@@ -47,6 +47,24 @@ const calculateSquareRoot = (num) => {
     return Math.sqrt(num);
 };
 
+const calculatePercentage = (num1, num2, operator) => {
+    const percentValue = num2 / 100;
+
+    switch (operator) {
+        case "+":
+            return num1 + (num1 * percentValue);
+        case "-":
+            return num1 - (num1 * percentValue);
+        case "*":
+            return num1 * percentValue;
+        case "/":
+            return num1 / percentValue;
+        default:
+            // If no operator, just convert to percentage
+            return percentValue;
+    }
+};
+
 // Perform arithmetic operations based on the provided operator
 const operate = (num1, num2, operator) => {
     switch (operator) {
@@ -98,6 +116,25 @@ buttons.forEach((button) => {
             const result = calculateSquareRoot(Number(numberForSquareRoot));
             currentInput = result.toString();
             firstOperand = result.toString(); // Update firstOperand as well
+            updateDisplay(currentInput);
+            return;
+        } else if (value === "%") {
+            // Percentage operation
+            if (currentInput === "") return;
+
+            if (currentOperator && firstOperand) {
+                // If we're in the middle of an operation, apply percentage in context
+                const result = calculatePercentage(Number(firstOperand), Number(currentInput), currentOperator);
+                currentInput = result.toString();
+                // Execute the operation immediately
+                firstOperand = currentInput;
+                currentOperator = null;
+                clearActiveOperators();
+            } else {
+                // Just convert to percentage if no operation is in progress
+                currentInput = (Number(currentInput) / 100).toString();
+            }
+
             updateDisplay(currentInput);
             return;
         } else if (value === "=") {
