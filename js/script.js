@@ -101,8 +101,15 @@ buttons.forEach((button) => {
             }
             return;
         } else if (value === "+" || value === "-" || value === "*" || value === "/") {
+            // If there's a previous operation waiting to be completed
+            if (currentOperator !== null && currentInput !== "" && firstOperand !== "") {
+                // Calculate the intermediate result
+                const result = operate(Number(firstOperand), Number(currentInput), currentOperator);
+                firstOperand = result.toString();
+                updateDisplay(result);
+            }
             // If no current input but we have a result from previous operation, use that
-            if (currentInput === "" && firstOperand !== "") {
+            else if (currentInput === "" && firstOperand !== "") {
                 // Continue with the previous result
                 // firstOperand already contains the result, so do nothing
             } else if (currentInput === "") {
