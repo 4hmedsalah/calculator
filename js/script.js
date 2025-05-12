@@ -61,7 +61,8 @@ const operate = (num1, num2, operator) => {
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         const value = button.getAttribute('data-value');
-        if (value === "C") {
+        if (value === "AC") {
+            // All Clear functionality - reset everything
             currentInput = "";
             firstOperand = "";
             lastOperand = "";
