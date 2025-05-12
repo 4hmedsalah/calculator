@@ -101,8 +101,18 @@ buttons.forEach((button) => {
             }
             return;
         } else if (value === "+" || value === "-" || value === "*" || value === "/") {
-            // Skip if there's no input
-            if (currentInput === "") return;
+            // If no current input but we have a result from previous operation, use that
+            if (currentInput === "" && firstOperand !== "") {
+                // Continue with the previous result
+                // firstOperand already contains the result, so do nothing
+            } else if (currentInput === "") {
+                // If no input at all, start with 0
+                currentInput = "0";
+                firstOperand = currentInput;
+            } else {
+                // Normal case: we have input, use it as first operand
+                firstOperand = currentInput;
+            }
 
             // Remove active class from all operator buttons
             clearActiveOperators();
@@ -110,9 +120,10 @@ buttons.forEach((button) => {
             // Add active class to the clicked operator button
             button.classList.add('operator-active');
 
-            firstOperand = currentInput;
             currentOperator = value;
             shouldResetDisplay = true;
+            // Clear currentInput when an operator is pressed
+            currentInput = "";
             return;
         } else if (value === "√") {
             // Use currentInput if available, otherwise use firstOperand (for post-calculation)
