@@ -209,3 +209,12 @@ buttons.forEach((button) => {
         updateDisplay(currentInput);
     });
 });
+
+// Prevent double-tap zoom
+document.addEventListener(
+    "dblclick",
+    function (event) {
+        event.preventDefault();
+    },
+    { passive: false }
+);
