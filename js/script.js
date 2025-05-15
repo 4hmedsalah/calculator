@@ -205,6 +205,12 @@ buttons.forEach((button) => {
             // Remove operator active state when user starts entering second number
             clearActiveOperators();
         }
+
+        // Prevent multiple decimal points in a number
+        if (value === "." && currentInput.includes(".")) {
+            return; // Skip adding another decimal point
+        }
+
         currentInput += value;
         updateDisplay(currentInput);
     });
