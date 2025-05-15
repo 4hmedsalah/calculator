@@ -3,6 +3,10 @@
     src: url("../assets/fonts/digital-7.regular.ttf");
 }
 
+html, body {
+    overflow: hidden;
+}
+
 body {
     display: flex;
     justify-content: center;
