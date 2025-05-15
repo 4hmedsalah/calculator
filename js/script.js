@@ -51,6 +51,19 @@ const updateDisplay = (value) => {
     if (displayValue === "Infinity" || displayValue === "-Infinity" || displayValue === "NaN") {
         displayValue = "Error";
     }
+
+    // Add thousands separators for better readability
+    if (displayValue !== "Error" && !isNaN(parseFloat(displayValue))) {
+        // Split number into integer and decimal parts
+        const parts = displayValue.split('.');
+
+        // Format the integer part with commas as thousands separators
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        // Join back with decimal point if it exists
+        displayValue = parts.join('.');
+    }
+
     display.textContent = displayValue;
 };
 
