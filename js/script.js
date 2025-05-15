@@ -256,3 +256,68 @@ document.addEventListener(
     },
     { passive: false }
 );
+
+// Add keyboard support
+document.addEventListener("keydown", (event) => {
+    const key = event.key;
+
+    // Handle number keys (0-9)
+    if (/^[0-9]$/.test(key)) {
+        simulateButtonClick(key);
+        return;
+    }
+
+    // Prevent spacebar and tab from causing unwanted behavior
+    if (key === " " || key === "Tab") {
+        event.preventDefault();
+        return;
+    }
+
+    // Handle operators and other calculator functions
+    switch (key) {
+        // Basic operators
+        case "+":
+            simulateButtonClick("+");
+            break;
+        case "-":
+            simulateButtonClick("-");
+            break;
+        case "*":
+            simulateButtonClick("*");
+            break;
+        case "/":
+            simulateButtonClick("/");
+            break;
+
+        // Special operations
+        case "Enter":
+        case "=":
+            event.preventDefault();
+            simulateButtonClick("=");
+            break;
+        case ".":
+            simulateButtonClick(".");
+            break;
+        case "%":
+            simulateButtonClick("%");
+            break;
+        case "Backspace":
+            simulateButtonClick("DEL");
+            break;
+        case "Delete":
+        case "Escape":
+            simulateButtonClick("AC");
+            break;
+        case "s":
+            simulateButtonClick("√");
+            break;
+    }
+});
+
+// Helper function to simulate a button click
+function simulateButtonClick(dataValue) {
+    const button = document.querySelector(`button[data-value="${dataValue}"]`);
+    if (button) {
+        button.click();
+    }
+}
