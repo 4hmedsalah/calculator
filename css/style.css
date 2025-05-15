@@ -1,8 +1,3 @@
-@font-face {
-    font-family: "Digital";
-    src: url("../assets/fonts/digital-7.regular.ttf");
-}
-
 html, body {
     overflow: hidden;
 }
@@ -53,7 +48,8 @@ body {
     background-color: #343434;
     text-align: right;
     border-radius: 2.5px;
-    font-family: "Digital";
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
     font-size: 62.5px;
     margin-bottom: 20px;
     margin-top: 5px;
