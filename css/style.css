@@ -79,6 +79,9 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.2s, transform 0.05s, box-shadow 0.05s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .btn:hover {
@@ -108,17 +111,14 @@ body {
 .sqrt-icon {
     width: 50px;
     height: 50px;
-    vertical-align: middle;
 }
 
 .divide-icon {
     width: 35px;
     height: 35px;
-    vertical-align: middle;
 }
 
 .multiply-icon {
     width: 40px;
     height: 40px;
-    vertical-align: middle;
 }
