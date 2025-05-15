@@ -18,10 +18,20 @@ const clearActiveOperators = () => {
 
 const updateDisplay = (value) => {
     let displayValue = value.toString();
+
+    // Remove leading zeros if the value is a number with digits after the zeros
+    if (displayValue !== "" && displayValue !== "0" && !displayValue.startsWith("0.")) {
+        // Check if it's a numeric string with leading zeros followed by other digits
+        if (/^0+[1-9]/.test(displayValue)) {
+            displayValue = displayValue.replace(/^0+/, '');
+        }
+    }
+
     // Limit display length for readability
     if (displayValue.length > 14) {
         displayValue = parseFloat(displayValue).toPrecision(10); // Use precision for long numbers
     }
+
     // Handle potential "Infinity" or "NaN"
     if (displayValue === "Infinity" || displayValue === "-Infinity" || displayValue === "NaN") {
         displayValue = "Error";
@@ -209,6 +219,28 @@ buttons.forEach((button) => {
         // Prevent multiple decimal points in a number
         if (value === "." && currentInput.includes(".")) {
             return; // Skip adding another decimal point
+        }
+
+        // Handle decimal point after initial zero
+        if (value === "." && (currentInput === "0" || currentInput === "")) {
+            currentInput = currentInput === "" ? "0" : currentInput;
+            currentInput += value;
+            updateDisplay(currentInput);
+            return;
+        }
+
+        // Prevent adding multiple zeros at the beginning
+        if (value === "0" && (currentInput === "0" || currentInput === "")) {
+            currentInput = "0";
+            updateDisplay(currentInput);
+            return;
+        }
+
+        // Handle non-zero digit after initial zero (replace the zero)
+        if (currentInput === "0" && value !== "0" && value !== ".") {
+            currentInput = value;
+            updateDisplay(currentInput);
+            return;
         }
 
         currentInput += value;
