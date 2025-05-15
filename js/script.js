@@ -9,6 +9,21 @@ let firstOperand = "";
 let lastOperand = "";  // For storing the second operand in repeat operations
 let currentOperator = null;
 let shouldResetDisplay = false;
+let memoryValue = 0;
+let mrcPressed = false;  // Track if MRC was pressed once (to differentiate between recall and clear)
+
+// Function to update the MRC button visual state based on memory value
+const updateMemoryButtonState = () => {
+    const mrcButton = document.querySelector("button[data-value=\"MRC\"]");
+    if (mrcButton) {
+        // If memory has a value, highlight the MRC button
+        if (memoryValue !== 0) {
+            mrcButton.classList.add("memory-active");
+        } else {
+            mrcButton.classList.remove("memory-active");
+        }
+    }
+};
 
 const clearActiveOperators = () => {
     document.querySelectorAll('.operator').forEach(op => {
@@ -100,8 +115,11 @@ buttons.forEach((button) => {
             firstOperand = "";
             lastOperand = "";
             currentOperator = null;
+            memoryValue = 0;
+            mrcPressed = false;
             clearActiveOperators();
             updateDisplay("0");
+            updateMemoryButtonState();
             return;
         } else if (value === "DEL") {
             // Delete last character from current input
@@ -172,6 +190,48 @@ buttons.forEach((button) => {
 
             updateDisplay(currentInput);
             return;
+        } else if (value === "M+") {
+            // Add current display value to memory
+            if (currentInput !== "") {
+                memoryValue += Number(currentInput);
+            } else if (firstOperand !== "") {
+                memoryValue += Number(firstOperand);
+            }
+
+            // Set flag to reset display on next number input
+            shouldResetDisplay = true;
+            updateMemoryButtonState();
+            return;
+        } else if (value === "M-") {
+            // Subtract current display value from memory
+            if (currentInput !== "") {
+                memoryValue -= Number(currentInput);
+            } else if (firstOperand !== "") {
+                memoryValue -= Number(firstOperand);
+            }
+
+            // Set flag to reset display on next number input
+            shouldResetDisplay = true;
+            updateMemoryButtonState();
+            return;
+        } else if (value === "MRC") {
+            // MRC button handles memory recall and clear
+            if (mrcPressed) {
+                // Second press of MRC clears the memory
+                memoryValue = 0;
+                mrcPressed = false;
+                shouldResetDisplay = true;
+                // Update the MRC button visual state when memory is cleared
+                updateMemoryButtonState();
+            } else {
+                // First press of MRC recalls the memory but only if memory has a value
+                if (memoryValue !== 0) {
+                    currentInput = memoryValue.toString();
+                    updateDisplay(currentInput);
+                    mrcPressed = true;
+                }
+            }
+            return;
         } else if (value === "=") {
             // Skip if there's no operator
             if (currentOperator === null) return;
@@ -214,6 +274,7 @@ buttons.forEach((button) => {
 
             // Remove operator active state when user starts entering second number
             clearActiveOperators();
+            mrcPressed = false;
         }
 
         // Prevent multiple decimal points in a number

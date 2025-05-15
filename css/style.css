@@ -94,6 +94,16 @@ body {
     box-shadow: 0 1px #040404;
 }
 
+.memory {
+    position: relative;
+}
+
+/* Highlight for MRC button when memory has a value */
+.memory-active {
+    background-color: #343434;
+    color: #ffb27a;
+}
+
 .operator-active {
     background-color: #343434;
     transform: translateY(3px);
