@@ -47,16 +47,19 @@ const updateDisplay = (value) => {
         displayValue = "Error";
     }
 
-    // Add thousands separators for better readability
+    // Switch to scientific notation if display digits reach 11 or more
     if (displayValue !== "Error" && !isNaN(parseFloat(displayValue))) {
-        // Split number into integer and decimal parts
-        const parts = displayValue.split('.');
-
-        // Format the integer part with commas as thousands separators
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-        // Join back with decimal point if it exists
-        displayValue = parts.join('.');
+        // Remove commas, minus, and dot for digit count
+        const digitCount = displayValue.replace(/[,.-]/g, "").length;
+        if (digitCount >= 11) {
+            // Use 5 significant digits for compactness
+            displayValue = Number(value).toExponential(5);
+        } else {
+            // Add thousands separators for better readability
+            const parts = displayValue.split('.');
+            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            displayValue = parts.join('.');
+        }
     }
 
     display.textContent = displayValue;
