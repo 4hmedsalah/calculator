@@ -46,15 +46,18 @@ body {
 .display {
     color: #b89678;
     background-color: #343434;
-    text-align: right;
     border-radius: 2.5px;
     font-family: "Inter", sans-serif;
     font-weight: 500;
-    font-size: 62.5px;
+    font-size: 50px;
     margin-bottom: 20px;
     margin-top: 5px;
     padding: 0 5px;
     word-break: break-all;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .buttons {

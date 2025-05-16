@@ -42,11 +42,6 @@ const updateDisplay = (value) => {
         }
     }
 
-    // Limit display length for readability
-    if (displayValue.length > 14) {
-        displayValue = parseFloat(displayValue).toPrecision(10); // Use precision for long numbers
-    }
-
     // Handle potential "Infinity" or "NaN"
     if (displayValue === "Infinity" || displayValue === "-Infinity" || displayValue === "NaN") {
         displayValue = "Error";
@@ -65,6 +60,21 @@ const updateDisplay = (value) => {
     }
 
     display.textContent = displayValue;
+
+    const fontSizeConfig = {
+        maxSize: 50,
+        minSize: 42,
+        reductionRate: 4,
+        thresholdLength: 8
+    };
+
+    const displayTextLength = displayValue.length;
+    const fontSize = Math.max(
+        fontSizeConfig.minSize,
+        fontSizeConfig.maxSize - fontSizeConfig.reductionRate * Math.max(0, displayTextLength - fontSizeConfig.thresholdLength)
+    );
+
+    display.style.fontSize = `${fontSize}px`;
 };
 
 const add = (num1, num2) => num1 + num2;
@@ -314,6 +324,15 @@ buttons.forEach((button) => {
         if (currentInput === "0" && value !== "0" && value !== ".") {
             currentInput = value;
             updateDisplay(currentInput);
+            return;
+        }
+
+        // Check total digits (excluding decimal points)
+        const countWithoutDecimals = currentInput.replace(/\./g, "").length;
+
+        // Enforce 10-character limit
+        if (countWithoutDecimals >= 10) {
+            // Don't add more digits or decimal point if already at max limit
             return;
         }
 
