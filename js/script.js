@@ -34,14 +34,6 @@ const clearActiveOperators = () => {
 const updateDisplay = (value) => {
     let displayValue = value.toString();
 
-    // Remove leading zeros if the value is a number with digits after the zeros
-    if (displayValue !== "" && displayValue !== "0" && !displayValue.startsWith("0.")) {
-        // Check if it's a numeric string with leading zeros followed by other digits
-        if (/^0+[1-9]/.test(displayValue)) {
-            displayValue = displayValue.replace(/^0+/, '');
-        }
-    }
-
     // Handle potential "Infinity" or "NaN"
     if (displayValue === "Infinity" || displayValue === "-Infinity" || displayValue === "NaN") {
         displayValue = "Error";
