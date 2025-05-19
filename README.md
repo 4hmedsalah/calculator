@@ -14,8 +14,6 @@ A Stylish, modern, and responsive web-based calculator application built with HT
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"></a>
 </div>
 
----
-
 ## Features
 
 - **Standard Arithmetic Operations:** Addition, subtraction, multiplication, division.
@@ -36,15 +34,9 @@ A Stylish, modern, and responsive web-based calculator application built with HT
   - Works offline on supported browsers
 - **Keyboard Support:** Allows input via physical keyboard for most operations.
 
----
-
 ## Installation
 
-### Option 1: Live Preview
-
-Visit the [**Live Preview**](https://4hmedsalah.github.io/calculator/) to use the calculator immediately without any installation. It works perfectly on both desktop and mobile devices.
-
-### Option 2: Running Locally
+### Running Locally
 
 1.  Clone this repository:
     ```zsh
@@ -52,30 +44,22 @@ Visit the [**Live Preview**](https://4hmedsalah.github.io/calculator/) to use th
     ```
 2.  Open the `index.html` file in your preferred web browser.
 
-The application is fully responsive and supports all modern mobile and desktop browsers.
+### Live Preview
 
----
+Visit the [**Live Preview**](https://4hmedsalah.github.io/calculator/) to use the calculator immediately without any installation.
 
 ## Technologies Used
 
-- **HTML** - Semantic markup for structure
-- **CSS** - Custom styling with flexbox for responsive layout
+- **HTML5** - Semantic markup for structure
+- **CSS3** - Custom styling with flexbox for responsive layout
 - **JavaScript** - Core functionality and calculations
 
 No external frameworks or libraries are used, ensuring a lightweight and fast application with minimal loading times.
 
----
-
 ## License
 
-This project is licensed under the MIT License - see the [MIT License](LICENSE.txt) file for details.
-
----
+This project is licensed under the MIT License - see the [MIT License](LICENSE) file for details.
 
 ## Contributing
 
 Contributions are welcome! Feel free to submit a pull request or open an issue for any bugs or feature requests.
-
----
-
-**Author:** [Ahmed Salah](https://github.com/4hmedSalah)
