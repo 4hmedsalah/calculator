@@ -11,6 +11,7 @@ let currentOperator = null;
 let shouldResetDisplay = false;
 let memoryValue = 0;
 let mrcPressed = false;  // Track if MRC was pressed once (to differentiate between recall and clear)
+let lastOperator = null;
 
 // Function to update the MRC button visual state based on memory value
 const updateMemoryButtonState = () => {
@@ -133,6 +134,7 @@ buttons.forEach((button) => {
             firstOperand = "";
             lastOperand = "";
             currentOperator = null;
+            lastOperator = null;
             memoryValue = 0;
             mrcPressed = false;
             clearActiveOperators();
@@ -251,8 +253,11 @@ buttons.forEach((button) => {
             }
             return;
         } else if (value === "=") {
-            // Skip if there's no operator
-            if (currentOperator === null) return;
+            // Skip if there's no operator and no previous operation to repeat
+            if (currentOperator === null && lastOperator === null) return;
+
+            // Use current operator or fall back to last operator for repeats
+            const operatorForCalculation = currentOperator || lastOperator;
 
             // Handle case when firstOperand is empty (e.g., starting with operator)
             if (firstOperand === "") {
@@ -274,7 +279,7 @@ buttons.forEach((button) => {
             }
 
             // Perform the calculation
-            const result = operate(Number(firstOperand), Number(currentInput), currentOperator);
+            const result = operate(Number(firstOperand), Number(currentInput), operatorForCalculation);
 
             // Update display and state for next calculation
             updateDisplay(result);
@@ -282,6 +287,9 @@ buttons.forEach((button) => {
             firstOperand = result.toString();
             currentInput = ""; // Clear current input so next equals press will use lastOperand
             shouldResetDisplay = true;
+
+            // Save the operator for repeated operations
+            lastOperator = operatorForCalculation;
             currentOperator = null;
             return;
         }
