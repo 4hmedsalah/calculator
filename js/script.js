@@ -282,6 +282,7 @@ buttons.forEach((button) => {
             firstOperand = result.toString();
             currentInput = ""; // Clear current input so next equals press will use lastOperand
             shouldResetDisplay = true;
+            currentOperator = null;
             return;
         }
 
