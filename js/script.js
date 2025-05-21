@@ -33,6 +33,11 @@ const clearActiveOperators = () => {
 };
 
 const updateDisplay = (value) => {
+    // Fix floating-point precision issues before displaying
+    if (typeof value === 'number') {
+        value = parseFloat(value.toFixed(10));
+    }
+
     let displayValue = value.toString();
 
     // Handle potential "Infinity" or "NaN"
